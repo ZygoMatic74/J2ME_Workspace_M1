@@ -1,0 +1,271 @@
+!SESSION 2018-04-29 10:32:16.371 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-04-29 10:32:46.442
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nicolas'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.mtj.core 1 0 2018-04-29 10:34:56.068
+!MESSAGE Sun Java(TM) Wireless Toolkit 2.5.2_01 for CLDC/DefaultColorPhone was converted to Sun Java(TM) Wireless Toolkit 2.5.2_01 for CLDC/DefaultColorPhone
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:34:56.251
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:35:13.460
+!MESSAGE 
+!SESSION 2018-04-29 10:35:50.306 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-04-29 10:35:58.726
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nicolas'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2018-04-29 10:37:50.051 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-04-29 10:37:58.625
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nicolas'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:38:24.552
+!MESSAGE 
+
+!ENTRY org.eclipse.e4.ui.workbench 4 0 2018-04-29 10:40:10.701
+!MESSAGE 
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.mtj.core.project.runtime.MTJRuntimeList.switchActiveMTJRuntime(MTJRuntimeList.java:289)
+	at org.eclipse.mtj.internal.ui.configurations.ConfigManageComponent.restoreConfigurations(ConfigManageComponent.java:668)
+	at org.eclipse.mtj.internal.ui.configurations.ConfigManageComponent.performCancel(ConfigManageComponent.java:567)
+	at org.eclipse.mtj.internal.ui.editors.jad.form.pages.OverviewEditorPage.dispose(OverviewEditorPage.java:226)
+	at org.eclipse.ui.forms.editor.FormEditor.dispose(FormEditor.java:410)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.invalidate(CompatibilityPart.java:252)
+	at org.eclipse.ui.internal.e4.compatibility.CompatibilityPart.destroy(CompatibilityPart.java:412)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:55)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:990)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.processAnnotated(InjectorImpl.java:955)
+	at org.eclipse.e4.core.internal.di.InjectorImpl.uninject(InjectorImpl.java:185)
+	at org.eclipse.e4.core.internal.di.Requestor.uninject(Requestor.java:172)
+	at org.eclipse.e4.core.internal.contexts.ContextObjectSupplier$ContextInjectionListener.update(ContextObjectSupplier.java:84)
+	at org.eclipse.e4.core.internal.contexts.TrackableComputationExt.update(TrackableComputationExt.java:111)
+	at org.eclipse.e4.core.internal.contexts.EclipseContext.removeListenersTo(EclipseContext.java:482)
+	at org.eclipse.e4.core.contexts.ContextInjectionFactory.uninject(ContextInjectionFactory.java:144)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.safeRemoveGui(PartRenderingEngine.java:944)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.access$1(PartRenderingEngine.java:863)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:858)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.removeGui(PartRenderingEngine.java:842)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.subscribeTopicToBeRendered(PartRenderingEngine.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:55)
+	at org.eclipse.e4.core.di.internal.extensions.EventObjectSupplier$DIEventHandler.handleEvent(EventObjectSupplier.java:88)
+	at org.eclipse.equinox.internal.event.EventHandlerWrapper.handleEvent(EventHandlerWrapper.java:201)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:197)
+	at org.eclipse.equinox.internal.event.EventHandlerTracker.dispatchEvent(EventHandlerTracker.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.ListenerQueue.dispatchEventSynchronous(ListenerQueue.java:148)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.dispatchEvent(EventAdminImpl.java:135)
+	at org.eclipse.equinox.internal.event.EventAdminImpl.sendEvent(EventAdminImpl.java:78)
+	at org.eclipse.equinox.internal.event.EventComponent.sendEvent(EventComponent.java:39)
+	at org.eclipse.e4.ui.services.internal.events.EventBroker.send(EventBroker.java:52)
+	at org.eclipse.e4.ui.internal.workbench.UIEventPublisher.notifyChanged(UIEventPublisher.java:60)
+	at org.eclipse.emf.common.notify.impl.BasicNotifierImpl.eNotify(BasicNotifierImpl.java:374)
+	at org.eclipse.e4.ui.model.application.ui.impl.UIElementImpl.setToBeRendered(UIElementImpl.java:303)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.hidePart(PartServiceImpl.java:1328)
+	at org.eclipse.e4.ui.internal.workbench.PartServiceImpl.hidePart(PartServiceImpl.java:1258)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.closePart(StackRenderer.java:1266)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer.access$1(StackRenderer.java:1252)
+	at org.eclipse.e4.ui.workbench.renderers.swt.StackRenderer$5.close(StackRenderer.java:1121)
+	at org.eclipse.swt.custom.CTabFolder.onMouse(CTabFolder.java:1938)
+	at org.eclipse.swt.custom.CTabFolder.lambda$0(CTabFolder.java:333)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:86)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4428)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1079)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4238)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3817)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1150)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1039)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:680)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:594)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:151)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:653)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:590)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1499)
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:41:19.924
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:47:07.498
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:47:19.856
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:49:41.822
+!MESSAGE No permission information available for JMUnit for CLDC 1.0
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:49:41.829
+!MESSAGE No permission information available for JMUnit for CLDC 1.1
+
+!ENTRY org.eclipse.ui 4 4 2018-04-29 10:50:17.139
+!MESSAGE Referenced part does not exist yet: com.oracle.jme.toolkit.eclipse.wirelessmessaging.WmaConsoleView.
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:51:29.050
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:51:39.149
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:51:46.337
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:53:35.758
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:54:04.810
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:54:18.554
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:55:17.129
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:55:30.081
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:55:41.846
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:59:20.966
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 10:59:47.686
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:00:28.207
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:01:31.636
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:07:12.372
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:07:31.453
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:08:18.017
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:08:23.141
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:09:30.025
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:09:37.101
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:11:00.551
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:11:27.472
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:12:39.884
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:12:55.423
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:14:27.442
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:15:29.833
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:15:40.161
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:17:41.646
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:17:58.880
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:18:41.224
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:19:19.951
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:19:43.347
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:20:05.516
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:20:44.180
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:21:03.876
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:21:13.172
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:22:52.444
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:23:23.223
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:26:07.067
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 11:26:21.492
+!MESSAGE 

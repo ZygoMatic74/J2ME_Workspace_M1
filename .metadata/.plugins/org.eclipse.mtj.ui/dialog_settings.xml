@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.mtj.internal.ui.devices.DeviceImportWizard">
+		<item value="215" key="dialogHeight"/>
+		<item value="638" key="dialogWidth"/>
+		<section name="viewerSettings">
+			<item value="123" key="columnWidth_Configuration"/>
+			<item value="123" key="columnWidth_Name"/>
+			<item value="55" key="columnWidth_Install"/>
+			<item value="123" key="columnWidth_Group"/>
+			<item value="123" key="columnWidth_Profile"/>
+		</section>
+	</section>
+	<section name="ConfigManageComponentSettings">
+		<item value="60" key="columnWidth_active"/>
+		<item value="240" key="columnWidth_Configuration"/>
+	</section>
+	<section name="NewMidletWizard">
+		<section name="NewMidletClass">
+			<item value="true" key="constructors"/>
+			<item value="true" key="addToJad"/>
+			<item value="true" key="unimplemented"/>
+		</section>
+	</section>
+	<section name="EclipseMEProjectImportWizard">
+	</section>
+	<section name="ConfigWizardSettings">
+		<item value="260" key="columnWidth_Symbol"/>
+		<item value="390" key="columnWidth_Value"/>
+		<item value="320" key="columnWidth_User defined Symbol Set"/>
+		<item value="80" key="columnWidth_Choose"/>
+	</section>
+</section>
