@@ -3,7 +3,7 @@ package JewelMidlet32bits;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
-// Ceci est bien le fichier exporter sur github
+
 public class Board {
 
 	private byte[] boardGame;
