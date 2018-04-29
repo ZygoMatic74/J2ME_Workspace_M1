@@ -43,7 +43,6 @@ public class Board {
         }
     }
     
-    // Permet de charger le board avec un fichier
     public void read(InputStream is){
         int c;
         int x = 0, y = 0;

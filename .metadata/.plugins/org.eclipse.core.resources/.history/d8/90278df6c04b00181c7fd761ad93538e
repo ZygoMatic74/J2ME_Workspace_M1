@@ -122,7 +122,6 @@ public class JewelCanvas extends Canvas{
 		return true;
     }
     
-    // Met à jour la couche graphique du board
 	protected void paint(Graphics g) {
 		// TODO Auto-generated method stub
 		synchronized (board) {

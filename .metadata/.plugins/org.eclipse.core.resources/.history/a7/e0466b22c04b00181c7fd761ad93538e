@@ -43,7 +43,6 @@ public class Board {
         }
     }
     
-    // Permet de charger le board avec un fichier
     public void read(InputStream is){
         int c;
         int x = 0, y = 0;
@@ -114,7 +113,6 @@ public class Board {
         boardGame[index(x, y)] = value;
     }
 
-    // Retourne l'index de la case 
     private int index(int x, int y) {
         if (x < 0 || x >= width ||
         y < 0 || y >= height)

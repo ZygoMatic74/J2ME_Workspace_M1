@@ -43,7 +43,6 @@ public class Board {
         }
     }
     
-    // Permet de charger le board avec un fichier
     public void read(InputStream is){
         int c;
         int x = 0, y = 0;
@@ -114,7 +113,6 @@ public class Board {
         boardGame[index(x, y)] = value;
     }
 
-    // Retourne l'index de la case 
     private int index(int x, int y) {
         if (x < 0 || x >= width ||
         y < 0 || y >= height)
@@ -123,22 +121,18 @@ public class Board {
         return y * width + x;
     }
     
-    // Retourne la largeur du board
     public int getWidth() {
         return width;
     }
 
-    // Retournes la hauteur du board
     public int getHeight() {
         return height;
     }
 	
-    // Renvoie true si les pos x,y sont celles du joueur
     public boolean equalPosPlayer(int x, int y){
     	return (index(x,y) == posPlayer);
     }
     
-    // Déplace le joueur en fonction du type de mouvement UP, DOWN, RIGHT, LEFT
     public void movePlayer(int move){
     	int offset = indexOffset(move);
     	if(posPlayer+offset > -1 && posPlayer+offset < width*height) {
@@ -163,7 +157,6 @@ public class Board {
     	}
     }
     
-    // Renvoie la valeur en offset du déplacement
     private int indexOffset(int move) {
         switch (move & 3) {
         case LEFT:
