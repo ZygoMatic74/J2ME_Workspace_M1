@@ -138,6 +138,13 @@ public class Board {
     	return (index(x,y) == posPlayer);
     }
     
+    public boolean proximatePlayer(int x, int y) {
+    	int indexJewel = index(x,y);
+    	return (indexJewel == posPlayer-1 
+    			|| indexJewel == posPlayer+1 
+    			|| indexJewel == posPlayer-width 
+    			|| indexJewel == posPlayer+width);
+    }
     // Déplace le joueur en fonction du type de mouvement UP, DOWN, RIGHT, LEFT
     public void movePlayer(int move){
     	int offset = indexOffset(move);

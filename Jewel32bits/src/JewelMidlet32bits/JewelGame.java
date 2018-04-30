@@ -9,6 +9,7 @@ public class JewelGame extends MIDlet implements CommandListener{
     Display display;
     private JewelCanvas canvas;
     private Command exitCommand = new Command("Exit", Command.EXIT, 60);
+    private Command selectCommand = new Command("Sélectionner", Command.OK, 30);
     
     public JewelGame(){
     	display = Display.getDisplay(this);
@@ -29,6 +30,7 @@ public class JewelGame extends MIDlet implements CommandListener{
 		// TODO Auto-generated method stub
 		canvas.init();
 		canvas.addCommand(exitCommand);
+		canvas.addCommand(selectCommand);
 		canvas.setCommandListener(this);
 		
 		display.setCurrent(canvas);
@@ -39,6 +41,9 @@ public class JewelGame extends MIDlet implements CommandListener{
 		if (c == exitCommand) {
 		    destroyApp(false);
 		    notifyDestroyed();
+		}
+		else if(c == selectCommand) {
+			canvas.applySelect();
 		}
 	}
 

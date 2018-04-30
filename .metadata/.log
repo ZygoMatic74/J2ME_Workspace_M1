@@ -355,3 +355,225 @@ java.lang.IllegalArgumentException: Argument not valid
 
 !ENTRY org.eclipse.mtj.core 2 0 2018-04-29 17:21:17.851
 !MESSAGE 
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2018-04-29 17:27:16.489
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at jar:file:/C:/Users/Nicolas/Desktop/oracle-jmesdk-8-3-rr-eclipse-plugins.zip!/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:395)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.oomph.util.ReflectUtil.invokeMethod(ReflectUtil.java:117)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.fail(CachingRepositoryManager.java:353)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager.loadRepository(CachingRepositoryManager.java:244)
+	at org.eclipse.oomph.p2.internal.core.CachingRepositoryManager$Metadata.loadRepository(CachingRepositoryManager.java:476)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.doLoad(LoadMetadataRepositoryJob.java:118)
+	at org.eclipse.equinox.p2.ui.LoadMetadataRepositoryJob.runModal(LoadMetadataRepositoryJob.java:103)
+	at org.eclipse.equinox.internal.p2.ui.sdk.PreloadingRepositoryHandler$2.runModal(PreloadingRepositoryHandler.java:83)
+	at org.eclipse.equinox.p2.operations.ProvisioningJob.run(ProvisioningJob.java:177)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2018-04-29 17:27:16.490
+!MESSAGE No repository found at jar:file:/C:/Users/Nicolas/Desktop/oracle-jmesdk-8-3-rr-eclipse-plugins.zip!/.
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 17:33:07.633
+!MESSAGE No permission information available for JMUnit for CLDC 1.0
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-29 17:33:07.642
+!MESSAGE No permission information available for JMUnit for CLDC 1.1
+!SESSION 2018-04-29 17:44:49.354 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-04-29 17:45:06.051
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nicolas'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2018-04-30 19:25:06.326 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-04-30 19:25:17.238
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Nicolas'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 19:28:41.850
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 19:30:12.101
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 20:50:20.621
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:36:00.654
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:36:24.704
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:39:25.440
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:40:21.932
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:41:28.085
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:41:49.221
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:43:32.566
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:43:36.254
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:45:33.544
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:46:39.573
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:47:08.717
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:49:12.100
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:50:14.322
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:50:56.094
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:51:16.116
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:52:13.115
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:53:30.814
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:54:23.760
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:56:20.242
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:57:03.854
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:58:06.428
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:58:31.959
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 22:59:27.775
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:01:07.621
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:02:21.699
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:02:27.541
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:02:41.577
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:05:31.878
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:06:07.046
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:07:30.985
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:08:26.191
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:08:31.509
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:08:58.589
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:09:23.329
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:09:33.398
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:14:55.181
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:16:42.663
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:17:11.013
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:18:45.048
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:19:17.388
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:19:35.808
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:21:09.707
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:21:35.099
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:23:52.082
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:24:09.765
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:25:03.624
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:25:40.891
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:25:55.106
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:26:31.216
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:27:19.159
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:27:50.532
+!MESSAGE 
+
+!ENTRY org.eclipse.mtj.core 2 0 2018-04-30 23:29:10.708
+!MESSAGE 

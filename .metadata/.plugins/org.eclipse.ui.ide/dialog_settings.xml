@@ -6,4 +6,8 @@
 		<item value="C:\WorkspaceJ2ME"/>
 		<item value="C:\WorkspaceJ2ME\JewelProject"/>
 	</list>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1524990764490" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
+	</section>
 </section>

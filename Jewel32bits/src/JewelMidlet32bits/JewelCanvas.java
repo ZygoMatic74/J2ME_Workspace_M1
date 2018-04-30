@@ -10,12 +10,14 @@ public class JewelCanvas extends Canvas{
     private int w, h;
     private int bwidth, bheight;
     private static final int delta = 11;
-
+    private boolean isSelected = false;
+    private double decreaseSelected = 0.8;
+    
     private Board board;
     
     private static int redColor =   0xDB1702;
     private static int greenColor = 0x3A9D23;
-    private static int yellowColor = 0xC2F732;
+    private static int yellowColor = 0xCC5500;
     private static int purpleColor =  0xA10684;
     private static int blueColor =  0x318CE7;
     private static int whiteColor = 0xffffff;
@@ -50,7 +52,7 @@ public class JewelCanvas extends Canvas{
         }
     }
 
-    // Détecte les commande basic de déplacement UP, DOWN, RIGHT, LEFT
+    // Détecte les commandes basic de déplacement UP, DOWN, RIGHT, LEFT
     protected void keyPressed(int keyCode) {
 
         // Protect the data from changing during painting.
@@ -122,6 +124,12 @@ public class JewelCanvas extends Canvas{
 		return true;
     }
     
+    // Permet d'appliquer l'etat sélectionner ou déselectionner
+    public void applySelect() {
+    	isSelected = (isSelected == false);
+    	repaint();
+    }
+    
     // Met à jour la couche graphique du board
 	protected void paint(Graphics g) {
 		// TODO Auto-generated method stub
@@ -143,16 +151,29 @@ public class JewelCanvas extends Canvas{
 		    if (y2 > bheight)
 			y2 = bheight;
 	  
-		    // Fill entire area with ground color
+		    // Place un fond de la couleur choisi
 		    g.setColor(groundColor);
 		    g.fillRect(0, 0, w, h);
 		    
+    		int sizeCell = cell;
+    		int posRedim = 0;
+    		
 		    for(y=0; y < y2; y++){
 		    	for(x=0; x < x2; x++){
 		    		
+		    		// Permet de visualiser la position du joueur dans le plateau
 		    		if(board.equalPosPlayer(x, y)){
-		    			g.setColor(whiteColor);
-		    			g.fillRect(x*cell + delta, y*cell + delta, cell, cell);
+		    			g.setColor(whiteColor);	
+		    			g.fillArc(x*cell + delta - 1, y*cell + delta - 1, cell+2, cell+2,0,360);
+		    		}
+		    		
+		    		// Adapte la taille du joyaux pour marquer la sélection d'un joyau
+		    		sizeCell = cell;
+		    		posRedim = 0;
+		    		
+		    		if(isSelected && board.proximatePlayer(x,y)) {
+	    				sizeCell = (int) (sizeCell * decreaseSelected);
+	    				posRedim = (sizeCell-cell)/2;
 		    		}
 		    		
 		    		byte v = board.get(x, y);
@@ -160,27 +181,27 @@ public class JewelCanvas extends Canvas{
 				    
 					    case Board.RED:
 						g.setColor(redColor);
-						g.fillArc(x*cell + delta, y*cell + delta, cell, cell, 0, 360);
+						g.fillArc(x*cell + delta - posRedim, y*cell + delta - posRedim, sizeCell, sizeCell, 0, 360);
 						break;
 	
 					    case Board.GREEN:
 							g.setColor(greenColor);
-							g.fillArc(x*cell + delta, y*cell + delta, cell, cell, 0, 360);
+							g.fillArc(x*cell + delta - posRedim, y*cell + delta - posRedim, sizeCell, sizeCell, 0, 360);
 						break;
 						
 					    case Board.YELLOW:
 							g.setColor(yellowColor);
-							g.fillArc(x*cell + delta, y*cell + delta, cell, cell, 0, 360);
+							g.fillArc(x*cell + delta - posRedim, y*cell + delta - posRedim, sizeCell, sizeCell, 0, 360);
 						break;
 	
 					    case Board.PURPLE:
 							g.setColor(purpleColor);
-							g.fillArc(x*cell + delta, y*cell + delta, cell, cell, 0, 360);
+							g.fillArc(x*cell + delta - posRedim, y*cell + delta - posRedim, sizeCell, sizeCell, 0, 360);
 						break;
 						
 					    case Board.BLUE:
 							g.setColor(blueColor);
-							g.fillArc(x*cell + delta, y*cell + delta, cell, cell, 0, 360);
+							g.fillArc(x*cell + delta - posRedim, y*cell + delta - posRedim, sizeCell, sizeCell, 0, 360);
 						break;
 						
 					    default:
