@@ -7,6 +7,7 @@ import java.util.Random;
 public class Board {
 
 	private byte[] boardGame;
+    private byte[] toExplode;
 	private int width, height;
 	private int posPlayer;
 
@@ -33,7 +34,10 @@ public class Board {
         width = 9;
         height = 7;
         boardGame = new byte[width * height];
-        
+
+        toExplode = new byte[width * height];
+        this.initToExplode();
+
         Random rnd = new Random();
         
         for (int x = 0; x < width; x++) {
@@ -63,6 +67,8 @@ public class Board {
 			is.read();
 			
             boardGame = new byte[width * height];
+            toExplode = new byte[width * height];
+            this.initToExplode();
             
             posPlayer = index(width/2, height/2);
             
@@ -178,28 +184,97 @@ public class Board {
 
         int offset = indexOffset(move);
 
-        if(posPlayer+offset > -1 && posPlayer+offset < width*height) {
+        if(posPlayer+offset > 0 && posPlayer+offset < width*height) {
             byte jewelPlayer = boardGame[posPlayer];
             byte jewelSwitch = boardGame[posPlayer+offset];
 
             boardGame[posPlayer] = jewelSwitch;
             boardGame[posPlayer+offset] = jewelPlayer;
+            this.initToExplode();
+            this.setExplode();
+            this.printExplode();
         }
 
         return -1;
     }
 
-    // Explose tous les joyaux aligné
-    public int explodeJewels(){
+    // Initialise / RAZ le tableau permettant les explosions
+    public void initToExplode(){
         int x,y;
 
-        for(x=0;x<height;x++){
-            for(y=0;y<width;y++){
-
+        for(y=0;y<height;y++){
+            for(x=0;x<width;x++){
+                toExplode[index(x,y)] = 0;
             }
         }
+
     }
 
+    // Fonction permettant de set up le tableau setExplode
+        // Si une case ne possède pas de voisin gauche ou sup de la meme couleur
+        //      on effectue une recherche récursive
+        //      Sinon on lui attribue la meme valeur que son voisin
+    public void setExplode(){
+        int x,y,currentJewel;
+
+        for(y=0;y<height;y++){
+            for(x=0;x<width;x++){
+                currentJewel = index(x,y);
+                toExplode[currentJewel] = (byte) sameColor(currentJewel,currentJewel,0);
+            }
+         }
+    }
+
+    // Fonction récursive permettant de savoir combien de joyaux de même couleur
+        // sont aligné en partant du noeud node
+    private int sameColor(int parentNode, int node, int localStep){        
+        int sameColorRight = 0, sameColorDown = 0;
+        
+        if((node%width+1) < width && boardGame[node] == boardGame[node+1] && node+1 != parentNode ){
+            sameColorRight = sameColor(node,node+1, localStep + 1);
+            System.out.println(node + " " + localStep + " ," + sameColorRight);
+        }  
+        
+        if((node+width) < width*height && boardGame[node] == boardGame[node + width] && node+width != parentNode){
+            sameColorDown = sameColor(node,node+width, localStep + 1);
+            System.out.println(node + " " + localStep + " ," + sameColorDown);
+        }
+
+        int sameColorLeft = 0, sameColorUp = 0;
+
+        if((node%width-1) > 0 && boardGame[node] == boardGame[node-1] && node-1 != parentNode){
+            sameColorLeft = sameColor(node,node-1, localStep + 1);
+            System.out.println(node + " " + localStep + " ," + sameColorLeft);
+        }  
+       
+        if((node-width) >= 0 && boardGame[node] == boardGame[node - width] && node-width != parentNode){
+            sameColorUp = sameColor(node,node-width, localStep + 1);
+            System.out.println(node + " " + localStep + " ," + sameColorUp);
+        }
+        
+        if( sameColorRight + sameColorLeft < 2 && sameColorDown + sameColorUp < 2 && localStep == 0) {
+        	return 0;
+        }
+        
+        if(sameColorRight >= 1 || sameColorDown >= 1 || sameColorLeft >= 1 || sameColorUp >= 1){
+            return sameColorDown + sameColorRight + sameColorLeft + sameColorUp + 1;
+        }
+
+        return 1;
+    }
+    
+    // Affiche dans la console le tableau toExplode
+    public void printExplode(){
+        int x, y;
+
+        for(y=0; y<width; y++){
+            for(x=0;x<height;x++){
+                System.out.print(toExplode[index(x,y)] + " ");
+            }
+            System.out.println(" ");
+        }
+    }
+   
     // Renvoie la valeur en offset du déplacement
     private int indexOffset(int move) {
         switch (move & 3) {
