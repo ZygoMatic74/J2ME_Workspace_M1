@@ -8,6 +8,7 @@ public class Board {
 
 	private byte[] boardGame;
     private byte[] toExplode;
+    
 	private int width, height;
 	private int posPlayer;
 
@@ -17,11 +18,11 @@ public class Board {
 	public static final byte DOWN = 3;
 	
     public static final byte EMPTY = -1;
-	public static final byte RED = 0;
-	public static final byte YELLOW = 1;
-	public static final byte GREEN = 2;
-	public static final byte PURPLE = 3;
-	public static final byte BLUE = 4;
+	public static final byte RED = 1;
+	public static final byte YELLOW = 2;
+	public static final byte GREEN = 3;
+	public static final byte PURPLE = 4;
+	public static final byte BLUE = 5;
 	
 	public Board(){
 		generate();
@@ -36,7 +37,7 @@ public class Board {
         boardGame = new byte[width * height];
 
         toExplode = new byte[width * height];
-        this.initToExplode();
+        this.initArray(toExplode);
 
         Random rnd = new Random();
         
@@ -68,7 +69,6 @@ public class Board {
 			
             boardGame = new byte[width * height];
             toExplode = new byte[width * height];
-            this.initToExplode();
             
             posPlayer = index(width/2, height/2);
             
@@ -190,21 +190,28 @@ public class Board {
 
             boardGame[posPlayer] = jewelSwitch;
             boardGame[posPlayer+offset] = jewelPlayer;
-            this.initToExplode();
-            this.setExplode();
-            this.printExplode();
+            
+            initArray(toExplode);
+            int explosion = setExplode();
+            
+            if(explosion == 0) {
+            	System.out.println("Deplacement refuser aucune explosion créer.");
+                boardGame[posPlayer] = jewelPlayer;
+                boardGame[posPlayer+offset] = jewelSwitch;
+            }
         }
 
         return -1;
     }
 
     // Initialise / RAZ le tableau permettant les explosions
-    public void initToExplode(){
+    public void initArray(byte[] array){
         int x,y;
 
         for(y=0;y<height;y++){
             for(x=0;x<width;x++){
-                toExplode[index(x,y)] = 0;
+            	int index = index(x,y);
+                array[index] = 0;
             }
         }
 
@@ -214,53 +221,60 @@ public class Board {
         // Si une case ne possède pas de voisin gauche ou sup de la meme couleur
         //      on effectue une recherche récursive
         //      Sinon on lui attribue la meme valeur que son voisin
-    public void setExplode(){
-        int x,y,currentJewel;
+    public int setExplode(){
+        int x,y,currentJewel,sommeExplode = 0;
 
         for(y=0;y<height;y++){
             for(x=0;x<width;x++){
                 currentJewel = index(x,y);
-                toExplode[currentJewel] = (byte) sameColor(currentJewel,currentJewel,0);
+                toExplode[currentJewel] = (byte) sameColor(currentJewel);
+                sommeExplode += toExplode[currentJewel];
             }
          }
+        
+        return sommeExplode;
     }
 
-    // Fonction récursive permettant de savoir combien de joyaux de même couleur
+    // Fonction permettant de savoir combien de joyaux de même couleur
         // sont aligné en partant du noeud node
-    private int sameColor(int parentNode, int node, int localStep){        
-        int sameColorRight = 0, sameColorDown = 0;
+    private int sameColor(int node){        
+        int sameColorRight = 0, sameColorDown = 0, sameColorLeft = 0, sameColorUp = 0;
         
-        if((node%width+1) < width && boardGame[node] == boardGame[node+1] && node+1 != parentNode ){
-            sameColorRight = sameColor(node,node+1, localStep + 1);
-            System.out.println(node + " " + localStep + " ," + sameColorRight);
-        }  
-        
-        if((node+width) < width*height && boardGame[node] == boardGame[node + width] && node+width != parentNode){
-            sameColorDown = sameColor(node,node+width, localStep + 1);
-            System.out.println(node + " " + localStep + " ," + sameColorDown);
+        if(node%width-1 > -1 && boardGame[node] == boardGame[node-1]) {
+        	sameColorLeft++;
         }
-
-        int sameColorLeft = 0, sameColorUp = 0;
-
-        if((node%width-1) > 0 && boardGame[node] == boardGame[node-1] && node-1 != parentNode){
-            sameColorLeft = sameColor(node,node-1, localStep + 1);
-            System.out.println(node + " " + localStep + " ," + sameColorLeft);
-        }  
-       
-        if((node-width) >= 0 && boardGame[node] == boardGame[node - width] && node-width != parentNode){
-            sameColorUp = sameColor(node,node-width, localStep + 1);
-            System.out.println(node + " " + localStep + " ," + sameColorUp);
+        if(node%width-2 > -1 && boardGame[node] == boardGame[node-2]) {
+        	sameColorLeft++;
         }
         
-        if( sameColorRight + sameColorLeft < 2 && sameColorDown + sameColorUp < 2 && localStep == 0) {
+        if(node+1 < width*height && node%width + 1 < width && boardGame[node] == boardGame[node+1]) {
+        	sameColorRight++;
+        }
+        if(node+2 < width*height && node%width + 2 < width && boardGame[node] == boardGame[node+2]) {
+        	sameColorRight++;
+        }
+        
+        if(node-width > -1 && boardGame[node] == boardGame[node-width]) {
+        	sameColorDown++;
+        }
+        if(node-2*width > -1 && boardGame[node] == boardGame[node-2*width]) {
+        	sameColorDown++;
+        }
+        
+        if(node+width < width*height && boardGame[node] == boardGame[node+width]) {
+        	sameColorUp++;
+        }
+        if(node+2*width < width*height && boardGame[node] == boardGame[node+2*width]) {
+        	sameColorUp++;
+        }
+        
+        if(sameColorRight + sameColorLeft >=2
+        		|| sameColorUp + sameColorDown >= 2) {
+        	return boardGame[node];
+        }
+        else{
         	return 0;
         }
-        
-        if(sameColorRight >= 1 || sameColorDown >= 1 || sameColorLeft >= 1 || sameColorUp >= 1){
-            return sameColorDown + sameColorRight + sameColorLeft + sameColorUp + 1;
-        }
-
-        return 1;
     }
     
     // Affiche dans la console le tableau toExplode

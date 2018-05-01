@@ -33,7 +33,7 @@ public class JewelCanvas extends Canvas{
     	this.w = getWidth();
     	this.h = getHeight();
     	
-    	readScreen(2);
+    	readScreen(1);
     	repaint();
     }
     
