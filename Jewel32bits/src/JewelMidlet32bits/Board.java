@@ -9,12 +9,13 @@ public class Board {
 	private byte[] boardGame;
 	private int width, height;
 	private int posPlayer;
-	
+
 	public static final byte LEFT = 0;
 	public static final byte RIGHT = 1;
 	public static final byte UP = 2;
 	public static final byte DOWN = 3;
 	
+    public static final byte EMPTY = -1;
 	public static final byte RED = 0;
 	public static final byte YELLOW = 1;
 	public static final byte GREEN = 2;
@@ -138,6 +139,7 @@ public class Board {
     	return (index(x,y) == posPlayer);
     }
     
+    //Renvoie true si la case(x,y) est adjacente au joueur
     public boolean proximatePlayer(int x, int y) {
     	int indexJewel = index(x,y);
     	return (indexJewel == posPlayer-1 
@@ -145,6 +147,7 @@ public class Board {
     			|| indexJewel == posPlayer-width 
     			|| indexJewel == posPlayer+width);
     }
+
     // Déplace le joueur en fonction du type de mouvement UP, DOWN, RIGHT, LEFT
     public void movePlayer(int move){
     	int offset = indexOffset(move);
@@ -170,6 +173,33 @@ public class Board {
     	}
     }
     
+    // Echange deux joyaux si cela permet d'exploser un groupe
+    public int switchJewels(int move){
+
+        int offset = indexOffset(move);
+
+        if(posPlayer+offset > -1 && posPlayer+offset < width*height) {
+            byte jewelPlayer = boardGame[posPlayer];
+            byte jewelSwitch = boardGame[posPlayer+offset];
+
+            boardGame[posPlayer] = jewelSwitch;
+            boardGame[posPlayer+offset] = jewelPlayer;
+        }
+
+        return -1;
+    }
+
+    // Explose tous les joyaux aligné
+    public int explodeJewels(){
+        int x,y;
+
+        for(x=0;x<height;x++){
+            for(y=0;y<width;y++){
+
+            }
+        }
+    }
+
     // Renvoie la valeur en offset du déplacement
     private int indexOffset(int move) {
         switch (move & 3) {
@@ -185,7 +215,6 @@ public class Board {
         case DOWN:
             return +width;
         }
-
         return 0;
     }
 }

@@ -86,7 +86,13 @@ public class JewelCanvas extends Canvas{
                 return;
             }
             
-            board.movePlayer(move);
+            if(isSelected){
+            	board.switchJewels(move);
+            	isSelected = false;
+            }else{
+            	board.movePlayer(move);
+            }
+
             repaint();
         } // End of synchronization on the Board.
     }
