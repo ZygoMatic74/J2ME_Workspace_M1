@@ -43,7 +43,7 @@ public class Board {
         
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-            	byte t = (byte) (rnd.nextDouble() * 5);
+            	byte t = (byte) (1 + (rnd.nextDouble() * 4));
                 set(x, y, t);
             }
         }
@@ -179,7 +179,7 @@ public class Board {
     	}
     }
     
-    // Echange deux joyaux si cela permet d'exploser un groupe
+    // Echange deux joyaux si cela permet d'exploser au moins un groupe de joyaux
     public int switchJewels(int move){
 
         int offset = indexOffset(move);
@@ -198,13 +198,16 @@ public class Board {
             	System.out.println("Deplacement refuser aucune explosion créer.");
                 boardGame[posPlayer] = jewelPlayer;
                 boardGame[posPlayer+offset] = jewelSwitch;
+            }else {
+            	makeExplode();
+            	makeFallJewels();
+            	return explosion;
             }
         }
-
         return -1;
     }
 
-    // Initialise / RAZ le tableau permettant les explosions
+    // Initialise / RAZ un tableau
     public void initArray(byte[] array){
         int x,y;
 
@@ -217,11 +220,10 @@ public class Board {
 
     }
 
-    // Fonction permettant de set up le tableau setExplode
-        // Si une case ne possède pas de voisin gauche ou sup de la meme couleur
-        //      on effectue une recherche récursive
-        //      Sinon on lui attribue la meme valeur que son voisin
-    public int setExplode(){
+    // Fonction permettant de remplir le tableau toExplode
+    	// Chaque joyaux si il a au moins deux voisins dans le meme alignement
+    	// marque avec sa couleur le tableau toExplode[]
+    private int setExplode(){
         int x,y,currentJewel,sommeExplode = 0;
 
         for(y=0;y<height;y++){
@@ -235,6 +237,55 @@ public class Board {
         return sommeExplode;
     }
 
+    // Permet de faire exploser les alignement référencé dans toExplode[]
+    private void makeExplode() {
+    	int x, y;
+    	for(y=0; y<height;y++) {
+    		for(x=0;x<width;x++) {
+    			int currentJewel = index(x,y);
+    			if(toExplode[currentJewel] != 0) {
+    				boardGame[currentJewel] = EMPTY;
+    			}
+    		}
+    	}
+    }
+    
+    // Permet de faire tomber les Joyaux
+    private void makeFallJewels() {
+    	int x,y;
+    	int indexTrou;
+    	Random rnd = new Random();
+    	
+    	for(x=height-1;x>-1;x--) {
+    		for(y=width-1;y>-1;y--) {
+    			indexTrou = index(x,y);
+    			if(boardGame[indexTrou] == -1) {
+    				fallJewel(indexTrou,rnd);
+    			}
+    		}
+    	}
+    }
+    
+    // Permet de faire tomber un joyau,
+    	// Si aucun joyaux n'est présent au dessus du trou, en génère un aléatoirement.
+    private void fallJewel(int indexTrou, Random rnd) {
+    	int indexJewel = indexTrou - width;
+
+		while(indexJewel > -1 && boardGame[indexJewel] == -1) {
+			indexJewel -= width;
+		}
+		
+		if(indexJewel > -1 && boardGame[indexJewel] > - 1) {
+			boardGame[indexTrou] = boardGame[indexJewel];
+			boardGame[indexJewel] = EMPTY;
+		}
+		else {
+			byte newJewel = (byte)(1  + (rnd.nextDouble() * 4));
+			System.out.println(newJewel + " créer à l'indice " + indexTrou);
+			boardGame[indexTrou] = newJewel;
+		}
+    }
+    
     // Fonction permettant de savoir combien de joyaux de même couleur
         // sont aligné en partant du noeud node
     private int sameColor(int node){        
@@ -242,30 +293,30 @@ public class Board {
         
         if(node%width-1 > -1 && boardGame[node] == boardGame[node-1]) {
         	sameColorLeft++;
-        }
-        if(node%width-2 > -1 && boardGame[node] == boardGame[node-2]) {
-        	sameColorLeft++;
+            if(node%width-2 > -1 && boardGame[node] == boardGame[node-2]) {
+            	sameColorLeft++;
+            }
         }
         
         if(node+1 < width*height && node%width + 1 < width && boardGame[node] == boardGame[node+1]) {
         	sameColorRight++;
-        }
-        if(node+2 < width*height && node%width + 2 < width && boardGame[node] == boardGame[node+2]) {
-        	sameColorRight++;
+            if(node+2 < width*height && node%width + 2 < width && boardGame[node] == boardGame[node+2]) {
+            	sameColorRight++;
+            }
         }
         
         if(node-width > -1 && boardGame[node] == boardGame[node-width]) {
         	sameColorDown++;
-        }
-        if(node-2*width > -1 && boardGame[node] == boardGame[node-2*width]) {
-        	sameColorDown++;
+            if(node-2*width > -1 && boardGame[node] == boardGame[node-2*width]) {
+            	sameColorDown++;
+            }
         }
         
         if(node+width < width*height && boardGame[node] == boardGame[node+width]) {
         	sameColorUp++;
-        }
-        if(node+2*width < width*height && boardGame[node] == boardGame[node+2*width]) {
-        	sameColorUp++;
+            if(node+2*width < width*height && boardGame[node] == boardGame[node+2*width]) {
+            	sameColorUp++;
+            }
         }
         
         if(sameColorRight + sameColorLeft >=2
