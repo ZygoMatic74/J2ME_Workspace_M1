@@ -1,6 +1,8 @@
 package JewelMidlet32bits;
 
 import java.io.InputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.microedition.lcdui.*;
 
@@ -9,11 +11,9 @@ public class JewelCanvas extends Canvas{
     private int cell = 1;	
     private int w, h;
     private int bwidth, bheight;
-    private static final int delta = 11;
-    private boolean isSelected = false;
-    private double decreaseSelected = 0.8;
     
-    private Board board;
+    private static final int delta = 11;
+    private static final double decreaseSelected = 0.8;
     
     private static int redColor =   0xDB1702;
     private static int greenColor = 0x3A9D23;
@@ -23,19 +23,29 @@ public class JewelCanvas extends Canvas{
     private static int whiteColor = 0xffffff;
     private static int groundColor = 0x000000;
     
+    private boolean isSelected = false;
+    
+    private Board board;
+    
+    private Timer timer;
+    private static int frameRate = 20;
+    
+    private TimerTask fallAnimation;
+    private int lineToFall = 999;
+    
     public JewelCanvas(JewelGame _jewelgame) {
-    	super();
 		board = new Board();
     }
     
     // Initialise le Canvas avec le level 1
-    public void init(){
+    public void init() {
     	this.w = getWidth();
     	this.h = getHeight();
     	
-    	readScreen(1);
+    	readScreen(1); 	
     	repaint();
     }
+    
     
     // Permet de détecter que le joueur reste appuyer sur la touche
     protected void keyRepeated(int keyCode) {
@@ -87,13 +97,14 @@ public class JewelCanvas extends Canvas{
             }
             
             if(isSelected){
-            	board.switchJewels(move);
+            	int moveSuccess = board.switchJewels(move);
+            	repaint();
+            	if(moveSuccess > - 1) { lineToFall = bheight-1; startFallAnimation();}
             	isSelected = false;
             }else{
             	board.movePlayer(move);
+            	repaint();
             }
-
-            repaint();
         } // End of synchronization on the Board.
     }
     
@@ -139,23 +150,9 @@ public class JewelCanvas extends Canvas{
     // Met à jour la couche graphique du board
 	protected void paint(Graphics g) {
 		// TODO Auto-generated method stub
-		synchronized (board) {
+		synchronized (this) {
 
 		    int x = 0, y =  0, x2 = bwidth, y2 = bheight;
-
-		    // Figure what part needs to be repainted.
-		    int clipx = g.getClipX();
-		    int clipy = g.getClipY();
-		    int clipw = g.getClipWidth();
-		    int cliph = g.getClipHeight();
-		    x = clipx / cell;
-		    y = clipy / cell;
-		    x2 = (clipx + clipw + cell-1) / cell;
-		    y2 = (clipy + cliph + cell-1) / cell;
-		    if (x2 > bwidth)
-			x2 = bwidth;
-		    if (y2 > bheight)
-			y2 = bheight;
 	  
 		    // Place un fond de la couleur choisi
 		    g.setColor(groundColor);
@@ -217,5 +214,57 @@ public class JewelCanvas extends Canvas{
 		    }	    
 		}
 	}
-
+	
+    // Starts the frame redraw timer
+    protected void startFallAnimation() {
+        timer = new Timer();
+        System.out.println("Animation lancée");
+        
+        fallAnimation = new TimerTask() {
+            public void run() {
+            	synchronized(this) {
+            		
+            		int y;
+	            	for(y = 0; y < bwidth; y++) {	            		
+	            		if(board.boardGame[lineToFall*bwidth + y] == -1) {
+	            			int lineJewel = lineToFall - 1;
+	            			
+	            			while(lineJewel > -1 && board.boardGame[lineJewel*bwidth+y] == -1) {
+	            				lineJewel --;
+	            			}
+	            			
+	            			if(lineJewel > -1) {
+	            				System.out.println("A c'est bon case[" + lineJewel + "][" + y  + "]");
+	            				switchJewel(lineToFall*bwidth + y, lineJewel*bwidth + y);
+	            			}
+	            		}
+	            	}
+	            	repaint();
+	            	if(lineToFall == 0) {
+	            		timer.cancel();
+	            	}else {
+	            		lineToFall --;
+	            	}
+            	}
+            }
+            
+        };
+        
+        long interval = 1000/frameRate;
+        
+		timer.schedule(fallAnimation, interval, interval);
+    }
+    
+    // Stops the frame redraw timer
+    protected void stopFallAnimation() {
+        timer.cancel();            
+    }
+    
+    public void switchJewel(int offset, int offset2) {
+    	synchronized(board) {
+        	byte temp = board.boardGame[offset];
+        	board.boardGame[offset] = board.boardGame[offset2];
+        	board.boardGame[offset2] = temp;
+    	}
+    }
 }

@@ -12,7 +12,7 @@ public class JewelGame extends MIDlet implements CommandListener{
     private Command selectCommand = new Command("Sélectionner", Command.OK, 30);
     
     public JewelGame(){
-    	display = Display.getDisplay(this);
+    	display = Display.getDisplay(this);    	
     	canvas = new JewelCanvas(this);
     }
     

@@ -6,8 +6,8 @@ import java.util.Random;
 
 public class Board {
 
-	private byte[] boardGame;
-    private byte[] toExplode;
+	public byte[] boardGame;
+    public byte[] toExplode;
     
 	private int width, height;
 	private int posPlayer;
@@ -117,7 +117,7 @@ public class Board {
         return boardGame[offset];
     }
 
-    private void set(int x, int y, byte value) {
+    public void set(int x, int y, byte value) {
         boardGame[index(x, y)] = value;
     }
 
@@ -148,10 +148,10 @@ public class Board {
     //Renvoie true si la case(x,y) est adjacente au joueur
     public boolean proximatePlayer(int x, int y) {
     	int indexJewel = index(x,y);
-    	return (indexJewel == posPlayer-1 
-    			|| indexJewel == posPlayer+1 
-    			|| indexJewel == posPlayer-width 
-    			|| indexJewel == posPlayer+width);
+    	return ((indexJewel == posPlayer-1 && posPlayer%width - 1 > -1)
+    			|| (indexJewel == posPlayer+1 && posPlayer%width+1 < width) 
+    			|| (indexJewel == posPlayer-width && posPlayer-width > -1)
+    			|| (indexJewel == posPlayer+width && posPlayer-width < width*height));
     }
 
     // Déplace le joueur en fonction du type de mouvement UP, DOWN, RIGHT, LEFT
@@ -200,13 +200,12 @@ public class Board {
                 boardGame[posPlayer+offset] = jewelSwitch;
             }else {
             	makeExplode();
-            	makeFallJewels();
             	return explosion;
             }
         }
         return -1;
     }
-
+    
     // Initialise / RAZ un tableau
     public void initArray(byte[] array){
         int x,y;
@@ -229,7 +228,9 @@ public class Board {
         for(y=0;y<height;y++){
             for(x=0;x<width;x++){
                 currentJewel = index(x,y);
-                toExplode[currentJewel] = (byte) sameColor(currentJewel);
+                if(boardGame[currentJewel] > - 1) {
+                	toExplode[currentJewel] = (byte) sameColor(currentJewel);
+                }
                 sommeExplode += toExplode[currentJewel];
             }
          }
@@ -238,7 +239,7 @@ public class Board {
     }
 
     // Permet de faire exploser les alignement référencé dans toExplode[]
-    private void makeExplode() {
+    public void makeExplode() {
     	int x, y;
     	for(y=0; y<height;y++) {
     		for(x=0;x<width;x++) {
@@ -251,7 +252,7 @@ public class Board {
     }
     
     // Permet de faire tomber les Joyaux
-    private void makeFallJewels() {
+    public void makeFallJewels() {
     	int x,y;
     	int indexTrou;
     	Random rnd = new Random();
