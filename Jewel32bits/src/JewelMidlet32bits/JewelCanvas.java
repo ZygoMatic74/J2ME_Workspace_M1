@@ -1,6 +1,7 @@
 package JewelMidlet32bits;
 
 import java.io.InputStream;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,9 +27,10 @@ public class JewelCanvas extends Canvas{
     private boolean isSelected = false;
     
     private Board board;
+    private Random rnd;
     
     private Timer timer;
-    private static int frameRate = 20;
+    private static int frameRate = 18;
     
     private TimerTask fallAnimation;
     private int lineToFall = 999;
@@ -41,6 +43,7 @@ public class JewelCanvas extends Canvas{
     public void init() {
     	this.w = getWidth();
     	this.h = getHeight();
+    	this.rnd = new Random();
     	
     	readScreen(1); 	
     	repaint();
@@ -97,9 +100,10 @@ public class JewelCanvas extends Canvas{
             }
             
             if(isSelected){
-            	int moveSuccess = board.switchJewels(move);
-            	repaint();
-            	if(moveSuccess > - 1) { lineToFall = bheight-1; startFallAnimation();}
+            	int moveSuccess;
+            	moveSuccess = board.switchJewels(move);
+                repaint();
+                if(moveSuccess > - 1) { lineToFall = bheight-1; startFallAnimation();}
             	isSelected = false;
             }else{
             	board.movePlayer(move);
@@ -218,12 +222,10 @@ public class JewelCanvas extends Canvas{
     // Starts the frame redraw timer
     protected void startFallAnimation() {
         timer = new Timer();
-        System.out.println("Animation lancée");
-        
+        System.out.println("." + lineToFall);
         fallAnimation = new TimerTask() {
             public void run() {
             	synchronized(this) {
-            		
             		int y;
 	            	for(y = 0; y < bwidth; y++) {	            		
 	            		if(board.boardGame[lineToFall*bwidth + y] == -1) {
@@ -234,16 +236,21 @@ public class JewelCanvas extends Canvas{
 	            			}
 	            			
 	            			if(lineJewel > -1) {
-	            				System.out.println("A c'est bon case[" + lineJewel + "][" + y  + "]");
 	            				switchJewel(lineToFall*bwidth + y, lineJewel*bwidth + y);
+	            			}
+	            			else {
+	            				byte newJewel = (byte) (1 + (rnd.nextDouble() * 3));
+	            				board.boardGame[y] = newJewel;
+	            				switchJewel(lineToFall*bwidth+y, y);
 	            			}
 	            		}
 	            	}
 	            	repaint();
 	            	if(lineToFall == 0) {
-	            		timer.cancel();
+	            		stopFallAnimation();
 	            	}else {
 	            		lineToFall --;
+	            		System.out.println("Decrease line" + lineToFall);
 	            	}
             	}
             }
@@ -257,7 +264,19 @@ public class JewelCanvas extends Canvas{
     
     // Stops the frame redraw timer
     protected void stopFallAnimation() {
-        timer.cancel();            
+        timer.cancel();
+        synchronized(board) {
+        	int explosion = board.setExplode();
+        	System.out.println(explosion);
+        	try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	if(explosion != 0) {board.makeExplode();repaint();lineToFall = bheight-1;startFallAnimation();}
+        }
+        
     }
     
     public void switchJewel(int offset, int offset2) {

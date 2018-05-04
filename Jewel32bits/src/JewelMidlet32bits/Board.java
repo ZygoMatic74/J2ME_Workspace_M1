@@ -18,11 +18,12 @@ public class Board {
 	public static final byte DOWN = 3;
 	
     public static final byte EMPTY = -1;
-	public static final byte RED = 1;
-	public static final byte YELLOW = 2;
-	public static final byte GREEN = 3;
-	public static final byte PURPLE = 4;
-	public static final byte BLUE = 5;
+    public static final byte WALL = 5;
+	public static final byte RED = 0;
+	public static final byte YELLOW = 1;
+	public static final byte GREEN = 2;
+	public static final byte PURPLE = 3;
+	public static final byte BLUE = 4;
 	
 	public Board(){
 		generate();
@@ -191,7 +192,7 @@ public class Board {
             boardGame[posPlayer] = jewelSwitch;
             boardGame[posPlayer+offset] = jewelPlayer;
             
-            initArray(toExplode);
+
             int explosion = setExplode();
             
             if(explosion == 0) {
@@ -222,9 +223,9 @@ public class Board {
     // Fonction permettant de remplir le tableau toExplode
     	// Chaque joyaux si il a au moins deux voisins dans le meme alignement
     	// marque avec sa couleur le tableau toExplode[]
-    private int setExplode(){
+    public int setExplode(){
         int x,y,currentJewel,sommeExplode = 0;
-
+        initArray(toExplode);
         for(y=0;y<height;y++){
             for(x=0;x<width;x++){
                 currentJewel = index(x,y);
@@ -251,71 +252,35 @@ public class Board {
     	}
     }
     
-    // Permet de faire tomber les Joyaux
-    public void makeFallJewels() {
-    	int x,y;
-    	int indexTrou;
-    	Random rnd = new Random();
-    	
-    	for(x=height-1;x>-1;x--) {
-    		for(y=width-1;y>-1;y--) {
-    			indexTrou = index(x,y);
-    			if(boardGame[indexTrou] == -1) {
-    				fallJewel(indexTrou,rnd);
-    			}
-    		}
-    	}
-    }
-    
-    // Permet de faire tomber un joyau,
-    	// Si aucun joyaux n'est présent au dessus du trou, en génère un aléatoirement.
-    private void fallJewel(int indexTrou, Random rnd) {
-    	int indexJewel = indexTrou - width;
-
-		while(indexJewel > -1 && boardGame[indexJewel] == -1) {
-			indexJewel -= width;
-		}
-		
-		if(indexJewel > -1 && boardGame[indexJewel] > - 1) {
-			boardGame[indexTrou] = boardGame[indexJewel];
-			boardGame[indexJewel] = EMPTY;
-		}
-		else {
-			byte newJewel = (byte)(1  + (rnd.nextDouble() * 4));
-			System.out.println(newJewel + " créer à l'indice " + indexTrou);
-			boardGame[indexTrou] = newJewel;
-		}
-    }
-    
     // Fonction permettant de savoir combien de joyaux de même couleur
         // sont aligné en partant du noeud node
     private int sameColor(int node){        
         int sameColorRight = 0, sameColorDown = 0, sameColorLeft = 0, sameColorUp = 0;
         
-        if(node%width-1 > -1 && boardGame[node] == boardGame[node-1]) {
+        if(node%width-1 > -1 && boardGame[node] != WALL && boardGame[node] == boardGame[node-1]) {
         	sameColorLeft++;
-            if(node%width-2 > -1 && boardGame[node] == boardGame[node-2]) {
+            if(node%width-2 > -1 && boardGame[node] != WALL && boardGame[node] == boardGame[node-2]) {
             	sameColorLeft++;
             }
         }
         
-        if(node+1 < width*height && node%width + 1 < width && boardGame[node] == boardGame[node+1]) {
+        if(node+1 < width*height && node%width + 1 < width && boardGame[node] != WALL  && boardGame[node] == boardGame[node+1]) {
         	sameColorRight++;
-            if(node+2 < width*height && node%width + 2 < width && boardGame[node] == boardGame[node+2]) {
+            if(node+2 < width*height && node%width + 2 < width && boardGame[node] != WALL && boardGame[node] == boardGame[node+2]) {
             	sameColorRight++;
             }
         }
         
-        if(node-width > -1 && boardGame[node] == boardGame[node-width]) {
+        if(node-width > -1 && boardGame[node] != WALL && boardGame[node] == boardGame[node-width]) {
         	sameColorDown++;
-            if(node-2*width > -1 && boardGame[node] == boardGame[node-2*width]) {
+            if(node-2*width > -1 && boardGame[node] != WALL && boardGame[node] == boardGame[node-2*width]) {
             	sameColorDown++;
             }
         }
         
-        if(node+width < width*height && boardGame[node] == boardGame[node+width]) {
+        if(node+width < width*height && boardGame[node] != WALL && boardGame[node] == boardGame[node+width]) {
         	sameColorUp++;
-            if(node+2*width < width*height && boardGame[node] == boardGame[node+2*width]) {
+            if(node+2*width < width*height && boardGame[node] != WALL && boardGame[node] == boardGame[node+2*width]) {
             	sameColorUp++;
             }
         }
